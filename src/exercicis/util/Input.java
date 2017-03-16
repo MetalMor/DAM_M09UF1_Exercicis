@@ -1,6 +1,5 @@
-package exercicis.ex01;
+package exercicis.util;
 
-import exercicis.Constants;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 

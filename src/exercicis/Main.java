@@ -1,6 +1,6 @@
 package exercicis;
 
-import exercicis.ex01.Ex01;
+import exercicis.builder.ExerciciBuilder;
 import exercicis.template.IExercici;
 
 /**
@@ -13,7 +13,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        IExercici ex = new Ex01();
+        ExerciciBuilder.setArgs(args);
+        IExercici ex = ExerciciBuilder.make(5);
         ex.execute();
     }
     
