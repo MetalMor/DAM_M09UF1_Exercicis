@@ -8,6 +8,7 @@ package exercicis.ex05;
 
 import exercicis.template.Exercici;
 import exercicis.util.Constants;
+import exercicis.util.Functions;
 import exercicis.util.Input;
 import java.io.PrintStream;
 import java.security.InvalidKeyException;
@@ -17,7 +18,6 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Arrays;
-import java.util.Formatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.BadPaddingException;
@@ -45,8 +45,6 @@ public class Ex05 extends Exercici {
     private static final String STR_MODE_AES_CIPHER = Constants.STR_MODE_AES_CIPHER;
     private static final String STR_PROVIDER_JCE = Constants.STR_PROVIDER_JCE;
     private static final String STR_PROVIDER_KEY_FACTORY = Constants.STR_PROVIDER_KEY_FACTORY;
-    
-    private static final String STR_HEX_FORMAT = Constants.STR_HEX_FORMAT;
     
     private static final String STR_INPUT_STRING_CONTINUOUSLY_REQUEST = Constants.STR_INPUT_STRING_CONTINUOUSLY_REQUEST;
     private static final String STR_NOT_PROCESSED_ERROR = Constants.STR_NOT_PROCESSED_ERROR;
@@ -101,27 +99,15 @@ public class Ex05 extends Exercici {
         String encryptedMessage = STR_NOT_PROCESSED_ERROR;
         try
         {
-            encryptedMessage = byteToHex(getCipher().doFinal());
+            encryptedMessage = Functions.byteToHex(getCipher().doFinal());
         }
         catch(IllegalBlockSizeException | BadPaddingException e)
         {
             e.printStackTrace();
-            Logger.getLogger(Ex05.class.getName()).log(Level.SEVERE, null, e);
         }
         return encryptedMessage;
     }
 
-    private String byteToHex(final byte[] hash)
-    {
-        String result;
-        try (Formatter formatter = new Formatter()) {
-            for (byte b : hash)
-                formatter.format(STR_HEX_FORMAT, b);
-            result = formatter.toString();
-        }
-        return result;
-    }
-    
     public Cipher getCipher() {
         return _cipher;
     }

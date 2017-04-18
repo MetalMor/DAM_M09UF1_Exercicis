@@ -8,6 +8,7 @@ package exercicis.ex02;
 import exercicis.util.FileInput;
 import exercicis.util.Constants;
 import exercicis.template.Exercici;
+import exercicis.util.Functions;
 import java.io.PrintStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -27,8 +28,6 @@ public class Ex02 extends Exercici {
     
     private static final String STR_MODE_SHA1 = Constants.STR_MODE_SHA1;
     private static final String STR_MODE_MD5 = Constants.STR_MODE_MD5;
-    
-    private static final String STR_HEX_FORMAT = Constants.STR_HEX_FORMAT;
     
     private static final String STR_NOT_PROCESSED_ERROR = Constants.STR_NOT_PROCESSED_ERROR;
     
@@ -62,24 +61,13 @@ public class Ex02 extends Exercici {
                 MessageDigest crypt = MessageDigest.getInstance(mode);
                 crypt.reset();
                 crypt.update(byteArray);
-                encryptedMessage = byteToHex(crypt.digest());
+                encryptedMessage = Functions.byteToHex(crypt.digest());
             }
             catch(NoSuchAlgorithmException e)
             {
                 Logger.getLogger(Ex02.class.getName()).log(Level.SEVERE, null, e);
             }
         return encryptedMessage;
-    }
-
-    private String byteToHex(final byte[] hash)
-    {
-        String result;
-        try (Formatter formatter = new Formatter()) {
-            for (byte b : hash)
-                formatter.format(STR_HEX_FORMAT, b);
-            result = formatter.toString();
-        }
-        return result;
     }
     
     private FileInput getInput() {

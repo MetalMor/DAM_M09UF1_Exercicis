@@ -8,6 +8,7 @@ package exercicis.ex01;
 import exercicis.util.Input;
 import exercicis.util.Constants;
 import exercicis.template.Exercici;
+import exercicis.util.Functions;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -28,8 +29,6 @@ public class Ex01 extends Exercici {
     private static final String STR_MODE_MD5 = Constants.STR_MODE_MD5;
     
     private static final String STR_MODE_ENCODING = Constants.STR_MODE_ENCODING;
-    
-    private static final String STR_HEX_FORMAT = Constants.STR_HEX_FORMAT;
     
     private static final String STR_INPUT_STRING_REQUEST = Constants.STR_INPUT_STRING_REQUEST;
     private static final String STR_NOT_PROCESSED_ERROR = Constants.STR_NOT_PROCESSED_ERROR;
@@ -60,24 +59,13 @@ public class Ex01 extends Exercici {
             MessageDigest crypt = MessageDigest.getInstance(mode);
             crypt.reset();
             crypt.update(message.getBytes(STR_MODE_ENCODING));
-            encryptedMessage = byteToHex(crypt.digest());
+            encryptedMessage = Functions.byteToHex(crypt.digest());
         }
         catch(NoSuchAlgorithmException | UnsupportedEncodingException e)
         {
             encryptedMessage = STR_NOT_PROCESSED_ERROR;
         }
         return encryptedMessage;
-    }
-
-    private String byteToHex(final byte[] hash)
-    {
-        String result;
-        try (Formatter formatter = new Formatter()) {
-            for (byte b : hash)
-                formatter.format(STR_HEX_FORMAT, b);
-            result = formatter.toString();
-        }
-        return result;
     }
     
     private Input getInput() {

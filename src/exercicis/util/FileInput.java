@@ -42,7 +42,8 @@ public class FileInput {
         try {
             _file = file;
             _file.mkdirs();
-            _inputStream = file != null && file.exists() ? new FileInputStream(_file) : null;
+            if(_file.isFile()) 
+                _inputStream = file != null && file.exists() ? new FileInputStream(_file) : null;
         } catch (FileNotFoundException | SecurityException ex) {
             Logger.getLogger(FileInput.class.getName()).log(Level.SEVERE, null, ex);
             _inputStream = null;

@@ -14,7 +14,7 @@ public class Main {
      */
     public static void main(String[] args) {
         ExerciciBuilder.setArgs(args);
-        IExercici ex = ExerciciBuilder.make(5);
+        IExercici ex = ExerciciBuilder.make(6);
         ex.execute();
     }
     
